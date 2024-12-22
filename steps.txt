@@ -64,4 +64,52 @@ echo > models/Task.js
 
 Шаг 5: Запуск серверной части
 
+Соединяем с базой данных MongoDB. Для этого создаем новый кластер https://cloud.mongodb.com/v2/617fc3ec8a59287999795147#/clusters/detail/Cluster0 и подключаем
+его к MongoCompas. Копируем строку подключения и вставляем ее в наш код в app.js. Перезапускаем сервер node app.js, соединение прошло успешно, видим
+MongoDB connected to Atlas
+Server running on http://localhost:5000
 MongoDB запущен,node app.js
+
+Тестируем, заходим на http://localhost:5000/tasks и видим пустой массив так как данных пока нет в базе данных.
+
+Шаг 6: Подключение клиентской части
+Обновляем client/src/App.js: добавляем запросы к API для работы с задачами
+
+Запускаем клиенстскую часть, переходим в папку клиент
+npm start
+
+Шаг 7: Добавляем валидацию и обработку ошибок
+На сервере: server/app.js 
+
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
+});
+
+На клиенте: client/app.js
+
+.catch((error) => {
+    console.error('Error:', error);
+    alert('An error occurred. Please try again.');
+});
+
+Шаг 8: Добавляем более сложную функциональность
+Изменение статуса задачи: пользователи могут отмечать задачи как выполненные.
+На сервере:
+
+app.patch('/tasks/:id', async (req, res) => {
+    const { id } = req.params;
+    const updatedTask = await Task.findByIdAndUpdate(id, { completed: req.body.completed }, { new: true });
+    res.json(updatedTask);
+});
+
+На клиенте: Добавлаем кнопку для переключения статуса задачи.
+
+Фильтры задач:
+
+Показываем только выполненные или невыполненные задачи.
+
+Шаг 9: Стилизация
+Используем библиотеку Material-UI
+npm install @mui/material @emotion/react @emotion/styled

@@ -11,8 +11,14 @@ const PORT = 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
+// Базовая обработка ошибок:
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
+});
+
 // MongoDB connection
-mongoose.connect('mongodb://127.0.0.1:27017/todolist', {
+mongoose.connect('mongodb+srv://Dina:VSYSedhiHFWoXL2J@cluster0.5qkjo.mongodb.net/testApp?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => console.log('MongoDB connected'))
@@ -44,6 +50,12 @@ app.delete('/tasks/:id', async (req, res) => {
     const { id } = req.params;
     await Task.findByIdAndDelete(id);
     res.status(204).end();
+});
+
+app.patch('/tasks/:id', async (req, res) => {
+    const { id } = req.params;
+    const updatedTask = await Task.findByIdAndUpdate(id, { completed: req.body.completed }, { new: true });
+    res.json(updatedTask);
 });
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
