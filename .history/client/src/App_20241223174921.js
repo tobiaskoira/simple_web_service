@@ -52,7 +52,7 @@ const App = () => {
 
     // Toggle task completion
     const toggleCompletion = async (id, completed) => {
-        const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
+        const response = await fetch(`http://localhost:5000/tasks/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ completed: !completed }),
@@ -62,6 +62,7 @@ const App = () => {
             tasks.map((task) => (task._id === updatedTask._id ? updatedTask : task))
         );
     };
+
     // Handle task filtering
     const filteredTasks = tasks.filter((task) => {
         if (filter === 'completed') return task.completed;

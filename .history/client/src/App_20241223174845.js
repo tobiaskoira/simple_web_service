@@ -34,7 +34,7 @@ const App = () => {
 
     // Add a new task
     const addTask = async () => {
-        const response = await fetch(`${API_BASE_URL}/tasks`, {
+        const response = await fetch('http://localhost:5000/tasks', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ title: newTask, completed: false }),
@@ -46,13 +46,13 @@ const App = () => {
 
     // Delete a task
     const deleteTask = async (id) => {
-        await fetch(`${API_BASE_URL}/tasks/${id}`, { method: 'DELETE' });
+        await fetch(`http://localhost:5000/tasks/${id}`, { method: 'DELETE' });
         setTasks(tasks.filter((task) => task._id !== id));
     };
 
     // Toggle task completion
     const toggleCompletion = async (id, completed) => {
-        const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
+        const response = await fetch(`http://localhost:5000/tasks/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ completed: !completed }),
@@ -62,6 +62,7 @@ const App = () => {
             tasks.map((task) => (task._id === updatedTask._id ? updatedTask : task))
         );
     };
+
     // Handle task filtering
     const filteredTasks = tasks.filter((task) => {
         if (filter === 'completed') return task.completed;
