@@ -1,0 +1,60 @@
+Шаг 1: Инициализация проекта
+
+npm init -y
+
+Это создаст файл package.json, в котором будут указаны зависимости и настройки проекта.
+
+Шаг 2: Установка зависимостей
+
+Серверные
+npm install express mongoose cors body-parser
+
+Клиентские
+React и Webpack с необходимыми плагинами, библиотека стилей MUI
+
+npm install react react-dom react-router-dom
+npm install webpack webpack-cli webpack-dev-server babel-loader @babel/core @babel/preset-env @babel/preset-react html-webpack-plugin css-loader style-loader @mui/material @emotion/react @emotion/styled 
+
+Шаг 3: Структура папок
+
+simple_web_service/
+│
+├── client/                  # Клиентская часть
+│   ├── public/              # Статические файлы (например, favicon)
+│   │   └── index.html       # HTML-шаблон для React
+│   ├── src/                 # Исходный код React
+│   │   ├── components/      # Компоненты React
+│   │   ├── App.js           # Главный компонент
+│   │   ├── index.js         # Точка входа
+│   │   └── styles.css       # Стили
+│   └── webpack.config.js    # Конфигурация Webpack
+│
+├── server/                  # Серверная часть
+│   ├── models/              # Модели MongoDB
+│   │   └── Task.js          # Модель для задач
+│   ├── app.js               # Основной файл сервера
+│   └── config.js            # Настройки сервера
+│
+├── package.json             # Общие настройки проекта
+└── README.md                # Описание проекта
+
+Использовала npx create-react-app client для более быстрого создания шаблона проекта. Поэтому проект уже настроен для использования Webpack, но файл webpack.config.js 
+скрыт внутри стандартной конфигурации Create React App (CRA). 
+
+Клиентская часть работает , запускается с помощью npm start.
+Теперь  переходим к созданию серверной части.
+
+Шаг 4: Создание серверной части
+
+Создайте папку server в корне вашего проекта:
+mkdir server
+cd server
+
+Инициализируйте серверный проект:
+npm init -y
+
+Установите зависимости: Установите необходимые библиотеки:
+
+npm install express mongoose cors body-parser
+
+Создаем файл app.js

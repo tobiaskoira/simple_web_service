@@ -177,6 +177,8 @@ heroku git:remote -a simple-web-service
 heroku git:remote -a your-app-name
 Отправьте код в Heroku:
 
+bash
+Copy code
 git push heroku main
 Если ваша основная ветка называется master, используйте:
 

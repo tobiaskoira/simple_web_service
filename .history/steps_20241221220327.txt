@@ -1,0 +1,16 @@
+Шаг 1: Инициализация проекта
+
+npm init -y
+
+Это создаст файл package.json, в котором будут указаны зависимости и настройки проекта.
+
+Шаг 2: Установка зависимостей
+
+Серверные
+npm install express mongoose cors body-parser
+
+Клиентские
+React и Webpack с необходимыми плагинами, библиотека стилей MUI
+
+npm install react react-dom react-router-dom
+npm install webpack webpack-cli webpack-dev-server babel-loader @babel/core @babel/preset-env @babel/preset-react html-webpack-plugin css-loader style-loader @mui/material @emotion/react @emotion/styled

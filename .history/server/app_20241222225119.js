@@ -5,17 +5,11 @@ const cors = require('cors');
 const Task = require('./models/Task');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-
-// Базовая обработка ошибок:
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something went wrong!');
-});
 
 // MongoDB connection
 mongoose.connect('mongodb+srv://Dina:VSYSedhiHFWoXL2J@cluster0.5qkjo.mongodb.net/testApp?retryWrites=true&w=majority', {
@@ -50,12 +44,6 @@ app.delete('/tasks/:id', async (req, res) => {
     const { id } = req.params;
     await Task.findByIdAndDelete(id);
     res.status(204).end();
-});
-
-app.patch('/tasks/:id', async (req, res) => {
-    const { id } = req.params;
-    const updatedTask = await Task.findByIdAndUpdate(id, { completed: req.body.completed }, { new: true });
-    res.json(updatedTask);
 });
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

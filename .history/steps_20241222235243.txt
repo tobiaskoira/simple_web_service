@@ -149,37 +149,7 @@ Heroku использует файл Procfile, чтобы знать, как з�
 bash
 Copy code
 web: node server/app.js
-
-
 Шаг 2: Настройка Heroku
-    1. Установливаем Heroku CLI
-    скачиваем Heroku CLI и установим его с официального сайта:
-    https://devcenter.heroku.com/articles/heroku-cli
-
-    2. Настройка переменных окружения
-
-     Наше приложение использует MongoDB Atlas, установим переменную окружения MONGO_URI:
-
-    3.Создаем приложение на Heroku
-    heroku create simple-web-service
-
-heroku config:set MONGO_URI="mongodb+srv://Dina:VSYSedhiHFWoXL2J@cluster0.5qkjo.mongodb.net/testApp?retryWrites=true&w=majority"
-
-После создания приложения привяжem его к нашему локальному репозиторию:
-
-heroku git:remote -a simple-web-service
-Теперь Heroku знает, что мы хотите деплоить этот проект в приложение simple-web-service.
-
-Шаг 3: Деплой приложения
-
-добавляем удалённый репозиторий Heroku:
-
-heroku git:remote -a your-app-name
-Отправьте код в Heroku:
-
-git push heroku main
-Если ваша основная ветка называется master, используйте:
-
-bash
-Copy code
-git push heroku master
+1. Установите Heroku CLI
+Если у вас не установлен Heroku CLI, скачайте и установите его с официального сайта:
+https://devcenter.heroku.com/articles/heroku-cli

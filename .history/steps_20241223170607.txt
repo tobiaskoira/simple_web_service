@@ -165,10 +165,12 @@ web: node server/app.js
 
 heroku config:set MONGO_URI="mongodb+srv://Dina:VSYSedhiHFWoXL2J@cluster0.5qkjo.mongodb.net/testApp?retryWrites=true&w=majority"
 
-После создания приложения привяжem его к нашему локальному репозиторию:
+После создания приложения привяжem его к вашему локальному репозиторию:
 
+bash
+Copy code
 heroku git:remote -a simple-web-service
-Теперь Heroku знает, что мы хотите деплоить этот проект в приложение simple-web-service.
+Теперь Heroku знает, что вы хотите деплоить этот проект в приложение simple-web-service.
 
 Шаг 3: Деплой приложения
 
@@ -177,6 +179,8 @@ heroku git:remote -a simple-web-service
 heroku git:remote -a your-app-name
 Отправьте код в Heroku:
 
+bash
+Copy code
 git push heroku main
 Если ваша основная ветка называется master, используйте:
 
