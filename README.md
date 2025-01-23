@@ -1,23 +1,23 @@
 # simple_web_service
 
-# Шаг 1: Инициализация проекта
+# Step 1: Project Initialization
 
 npm init -y
 
-Это создаст файл package.json, в котором будут указаны зависимости и настройки проекта.
+This will create a package.json file that lists the dependencies and settings for the project.
 
-# Шаг 2: Установка зависимостей
+# Step 2: Install Dependencies
 
-## Серверные
+## Server-Side Dependencies
 npm install express mongoose cors body-parser
 
-## Клиентские
-React и Webpack с необходимыми плагинами, библиотека стилей MUI
+## Client-Side Dependencies
+Install React, Webpack, and necessary plugins, along with Material-UI:
 
 npm install react react-dom react-router-dom
 npm install webpack webpack-cli webpack-dev-server babel-loader @babel/core @babel/preset-env @babel/preset-react html-webpack-plugin css-loader style-loader @mui/material @emotion/react @emotion/styled 
 
-# Шаг 3: Структура папок
+# Step 3: Project Structure
 
 simple_web_service/
 │
@@ -40,48 +40,47 @@ simple_web_service/
 ├── package.json             # Общие настройки проекта
 └── README.md                # Описание проекта
 
-Использовала npx create-react-app client для более быстрого создания шаблона проекта. Поэтому проект уже настроен для использования Webpack, но файл webpack.config.js 
-скрыт внутри стандартной конфигурации Create React App (CRA). 
+I used npx create-react-app client to quickly create a project template. Therefore, the project is already configured to use Webpack, but the webpack.config.js file is hidden inside the default configuration of Create React App (CRA).
 
-Клиентская часть работает , запускается с помощью npm start.
-Теперь  переходим к созданию серверной части.
+The client-side is functional and can be started using npm start.
+Now, let's move on to creating the server-side.
 
-# Шаг 4: Создание серверной части
+# Step 4: Backend Development
 
-Создаем папку server в корне вашего проекта:
+Create a server folder for the backend
 mkdir server
 cd server
 
-Инициализируем серверный проект:
+Initialize the backend project:
 npm init -y
 
-Установим зависимости: Установите необходимые библиотеки:
+Install necessary dependencies:
 
 npm install express mongoose cors body-parser
 
-Создаем файл app.js
-Создаем  модель для MongoDB
+Create  app.js
+Ceate model for MongoDB
 mkdir models
 echo > models/Task.js
 
-# Шаг 5: Запуск серверной части
+# Step 5: Run the Backend
 
-Соединяем с базой данных MongoDB. Для этого создаем новый кластер https://cloud.mongodb.com/v2/617fc3ec8a59287999795147#/clusters/detail/Cluster0 и подключаем
-его к MongoCompas. Копируем строку подключения и вставляем ее в наш код в app.js. Перезапускаем сервер node app.js, соединение прошло успешно, видим
+We connect to the MongoDB database. To do this, we create a new cluster  https://cloud.mongodb.com/v2/617fc3ec8a59287999795147#/clusters/detail/Cluster0 and connect it to MongoCompass. Copy the connection string and paste it into our code in app.js. Restart the server using node app.js. The connection is successful, and we see:
 MongoDB connected to Atlas
 Server running on http://localhost:5000
-MongoDB запущен,node app.js
+MongoDB is running, node app.js
 
-Тестируем, заходим на http://localhost:5000/tasks и видим пустой массив так как данных пока нет в базе данных.
+To test, go to http://localhost:5000/tasks, and you'll see an empty array since there is no data in the database yet.
 
-# Шаг 6: Подключение клиентской части
-Обновляем client/src/App.js: добавляем запросы к API для работы с задачами
+#Step 6: Connect Frontend to Backend
 
-Запускаем клиенстскую часть, переходим в папку клиент
+Update client/src/App.js to include API calls for managing tasks. For starting the frontend move to client folder:
+
+
 npm start
 
-# Шаг 7: Добавляем валидацию и обработку ошибок
-На сервере: server/app.js 
+Step 7: Add Validation and Error Handling
+On the Server: server/app.js 
 
 
 app.use((err, req, res, next) => {
@@ -89,16 +88,16 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something went wrong!');
 });
 
-На клиенте: client/app.js
+On client: client/app.js
 
 .catch((error) => {
     console.error('Error:', error);
     alert('An error occurred. Please try again.');
 });
 
-# Шаг 8: Добавляем более сложную функциональность
-Изменение статуса задачи: пользователи могут отмечать задачи как выполненные.
-На сервере:
+# Step 8: Add Advanced Functionality
+Add functionality to mark tasks as completed:
+On server:
 
 app.patch('/tasks/:id', async (req, res) => {
     const { id } = req.params;
@@ -106,90 +105,75 @@ app.patch('/tasks/:id', async (req, res) => {
     res.json(updatedTask);
 });
 
-На клиенте: Добавлаем кнопку для переключения статуса задачи.
+On client: Add a button to toggle task status.
 
-Фильтры задач:
+Tasks filtering.
 
-Показываем только выполненные или невыполненные задачи.
 
-# Шаг 9: Стилизация
-Используем библиотеку Material-UI
+# Step 9: Styling
+Use Material-UI for styling:
 npm install @mui/material @emotion/react @emotion/styled
 
- Размещение проекта на Heroku
- Шаг 1: Подготовка проекта к развертыванию
- -Настройка серверной части
-Проверяем, что сервер настроен для работы в продакшене:
+# Deployment to Heroku
+## Step 1: Prepare for Deployment
+### Backend Configuration
+Test, that server is ready for deployment:
 
-Изменяем порт в app.js для использования переменной окружения PORT:
+Update the app.js file to use an environment variable for the port:
 
 const PORT = process.env.PORT || 5000;
 
--Создание файла Procfile
-Создание файла Procfile
-Heroku использует файл Procfile, чтобы знать, как запускать приложение. В корне nashego проекта создаem файл Procfile с содержимым:
+-creating Procfile
+
+Heroku use Procfile, to konow how to start the application. Create a Procfile in the project root:
 
 web: node server/app.js
 
 
-# Для размещения проекта на Heroku, выполняем следующие шаги:
 
-## Шаг 1: Подготовка проекта к развертыванию
-### Настройка серверной части
-Убеждаемся, что сервер настроен для работы в продакшене:
-
-Изменяем порт в app.js для использования переменной окружения PORT:
-
-const PORT = process.env.PORT || 5000;
-Подключение к MongoDB Atlas уже настроено, так что дополнительные изменения не нужны.
-
-### Создание файла Procfile
-Heroku использует файл Procfile, чтобы знать, как запускать приложение. В корне  проекта создаем файл Procfile с содержимым:
-
-
-web: node server/app.js
-
-
-## Шаг 2: Настройка Heroku
-    1. Установливаем Heroku CLI
-    скачиваем Heroku CLI и установим его с официального сайта:
+## Step 2: Configure Heroku
+    1. Install Heroku CLI
+    
     https://devcenter.heroku.com/articles/heroku-cli
 
-    2. Настройка переменных окружения
+    2. Set environment variables for MongoDB:
 
-     Наше приложение использует MongoDB Atlas, установим переменную окружения MONGO_URI:
+    Our app use MongoDB Atlas, so set variable MONGO_URI:
 
-    3.Создаем приложение на Heroku
+    3.create app at Heroku
     heroku create simple-web-service
 
 heroku config:set MONGO_URI="mongodb+srv://Dina:VSYSedhiHFWoXL2J@cluster0.5qkjo.mongodb.net/testApp?retryWrites=true&w=majority"
 
-После создания приложения привяжem его к нашему локальному репозиторию:
+After creation lets unit it to our local repository
+
 
 heroku git:remote -a simple-web-service
-Теперь Heroku знает, что мы хотите деплоить этот проект в приложение simple-web-service.
 
-### Шаг 3: Деплой приложения
+Now heroku knows that we want deploy this application for simple-web-service.
 
-добавляем удалённый репозиторий Heroku:
+### Step 3: Deploy the Application
+
+
+Add a remote repository for Heroku:
 
 heroku git:remote -a your-app-name
-Отправьте код в Heroku:
+Push the code to Heroku:
 
 git push heroku main
-Если ваша основная ветка называется master, используйте:
+If your main branch is called master, use:
 
 bash
 Copy code
 git push heroku master
 
 
-### Шаг 4: Интеграция клиентской части
-#### Интеграция клиентской части
-Мы хотим видеть полноценный интерфейс, нужно настроить клиентскую часть (React). Вот как это сделать:
+### Step 4: Integrate the Frontend
+#### Integration of the Client-Side
+We want to see a complete interface, so the client-side (React) needs to be set up. Here's how to do it:
 cd client
 npm run build
 
 
-#### Сервируем статические файлы на сервере
+
 
