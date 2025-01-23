@@ -19,26 +19,7 @@ npm install webpack webpack-cli webpack-dev-server babel-loader @babel/core @bab
 
 # Step 3: Project Structure
 ![Project structure](structure.png)
-simple_web_service/
-│
-├── client/                  # Клиентская часть
-│   ├── public/              # Статические файлы (например, favicon)
-│   │   └── index.html       # HTML-шаблон для React
-│   ├── src/                 # Исходный код React
-│   │   ├── components/      # Компоненты React
-│   │   ├── App.js           # Главный компонент
-│   │   ├── index.js         # Точка входа
-│   │   └── styles.css       # Стили
-│   └── webpack.config.js    # Конфигурация Webpack
-│
-├── server/                  # Серверная часть
-│   ├── models/              # Модели MongoDB
-│   │   └── Task.js          # Модель для задач
-│   ├── app.js               # Основной файл сервера
-│   └── config.js            # Настройки сервера
-│
-├── package.json             # Общие настройки проекта
-└── README.md                # Описание проекта
+
 
 I used npx create-react-app client to quickly create a project template. Therefore, the project is already configured to use Webpack, but the webpack.config.js file is hidden inside the default configuration of Create React App (CRA).
 
